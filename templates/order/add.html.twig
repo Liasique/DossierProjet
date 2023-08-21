@@ -110,7 +110,7 @@
 	<script>
 
 		document.addEventListener("DOMContentLoaded", function () { // Créer une instance de Stripe avec votre clé d'API secrète
-const stripe = Stripe('pk_test_51Mg7IzKxeqnMlT95dGBQAIJdlvMHNhd6mG2tGru6Rrxlk6h5bdFYNW9yQjsN9aoNTm2g0TcJCEq5zisaFJFMIZ9r00GeLwDGrz');
+const stripe = Stripe('pk_test_51NhTNCG3Xgt7SvT6ieWgsYGilsx4mtC7oBUqPL2AgyZzjpeG1ZbJHUdRFzrrtbum9LgMkk0FI9xSFjiWtdjhjXNO00DjDgRNHo');
 
 // Récupérer le bouton de paiement
 const checkoutButton = document.getElementById('checkout-button');
@@ -118,7 +118,7 @@ const checkoutButton = document.getElementById('checkout-button');
 // Ajouter un écouteur d'événements sur le bouton de paiement
 checkoutButton.addEventListener('click', async () => {
 try {
-const response = await fetch("/commande/create-session/   {{ ref }}", {method: "POST"});
+const response = await fetch("/commande/create-session/{{ ref }}", {method: "POST"});
 const session = await response.json();
 
 if (session.error === 'order') { // Rediriger l'utilisateur vers une page spécifique pour traiter l'erreur

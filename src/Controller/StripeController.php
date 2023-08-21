@@ -27,7 +27,7 @@ class StripeController extends AbstractController
 
         // Si la commande n'existe pas, on renvoie une erreur
         if (!$order) {
-            new JsonResponse(['error' => 'order']);
+            return new JsonResponse(['error' => 'order']);
         }
         // Pour chaque produit de la commande, on crée un élément pour l'envoyer à Stripe
 
@@ -62,7 +62,7 @@ class StripeController extends AbstractController
             'quantity' => 1,
         ];
         // Configuration de l'API Stripe avec la clé secrète
-        Stripe::setApiKey('sk_test_51Mg7IzKxeqnMlT95DrhambItPnSdAUQV6MoAl5AH1Tl6zZ3HM0eIZNNq4v6dGFmFKbaxIHytVcVttx6MnSyjwKSS00x64Tcp7T');
+        Stripe::setApiKey('sk_test_51NhTNCG3Xgt7SvT6Q0Ki8JHlIQKAPG9tVGHAxKJk3O14ZzRkVIwpQOWR0nyq4nyPe70qHjl7HlvAtuRONWrwiAgc00FUBBsVKD');
         // Création de la session Stripe
         $checkoutSession = Session::create([
             'customer_email' => $this->getUser()->getEmail(),
