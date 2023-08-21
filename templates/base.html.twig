@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="OlgaLukianets">
+		<title>
+			{% block title %}Welcome to The Swanky Sack!
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			{{ encore_entry_link_tags('flex') }}
+			{{ encore_entry_link_tags('bootstrap') }}
+			{{ encore_entry_link_tags('fontawesome') }}
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/w3-css/4.1.0/w3.css" integrity="sha512Ef5r/bdKQ7JAmVBbTgivSgg3RM+SLRjwU0cAgySwTSv4+jYcVeDukMp+9lZGWT78T4vCUxgT3g+E8t7uabwRuw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+			<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<script>
+				$(document).ready(function () {
+$('a[href="#"]').click(function () {
+$('html, body').animate({
+scrollTop: 0
+}, 800);
+return false;
+});
+});
+			</script>
+		{% endblock %}
+
+	</head>
+	<body>
+		{% include '_partials/nav.html.twig' %}
+		<main
+			role="main" class="mb-xxl-5 pt-5">
+			{# si le block carousel est défini #}
+			{% if block ('carousel') is defined %}
+				<div id="carouselExampleTouch" class="carousel slide" data-mdb-touch="false">
+					<div class="carousel-indicators">
+						{% for key,item in carousels %}
+							<button type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide-to="{{ key }}" {% if key == 0 %} class="active" {% endif %} aria-current="true"></button>
+						{% endfor %}
+					</div>
+
+					<div class="carousel-inner">
+						{% for key,item in carousels %}
+							<div class="carousel-item {% if key == 0 %}active{% endif %}">
+								<div class="overlay"></div>
+								<img class="first-slide" src="{{ asset('uploads/' ~ item.illustration) }}" alt="{{ item.name }}">
+								<div class="carousel-caption d-none d-md-block">
+									<h1 class="text-start text-uppercase">{{ item.name }}</h1>
+									<p class="text-start">{{ item.description }}</p>
+									<p class="text-start">
+										<a class="btn btn-lg btn-primary" href="{{ item.bntUrl }}" role="button">{{ item.btnTitle }}</a>
+									</p>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+
+					<button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+
+					<button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleTouch" data-mdb-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+
+				</div>
+			{% endif %}
+
+			{# si le block carousel n'est pas défini, alors ajoute un margin-top de 5 #}
+			<div class="w3-container {% if block('carousel') is not defined %}mt-5{% endif %}" style="margin-top: 100px;"> {% block body %}{% endblock %}
+				</div>
+
+			</main>
+			{% include '_partials/footer.html.twig' %}
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js" integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+			{% block javascripts %}
+				{{ encore_entry_script_tags('app') }}
+			{% endblock %}
+		</body>
+	</html>
+</body></html>

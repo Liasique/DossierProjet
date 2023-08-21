@@ -1,0 +1,59 @@
+security:
+  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+  password_hashers:
+    # Il s'agit de la configuration pour le hachage des mots de passe.
+    #Le hachage est une manière de sécuriser les mots de passe en les transformant
+    # en une chaîne de caractères fixe, rendant presque impossible de retrouver le mot de passe original à partir du hash.
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    #Ceci indique que pour toutes les entités (ou classes) qui implémentent l'interface
+    #Symfony doit utiliser un algorithme de hachage automatiquement choisi pour hacher les mots de passe.
+  # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+  providers:
+    # Les fournisseurs sont des services qui chargent les utilisateurs pour le système de sécurité.
+    #Dans ce cas, un seul fournisseur est défini : app_user_provider.
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email #Ce fournisseur utilise l'entité User pour charger les utilisateurs par leur propriété email.
+
+  firewalls: #Les pare-feu définissent comment l'authentification est gérée pour différentes parties de notre application.
+    dev: #Ceci est un pare-feu pour l'environnement de développement.
+      #Il exclut la sécurité pour certaines routes comme le profiler et le web debug toolbar de Symfony.
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main: #Ceci est le pare-feu principal de l'application.
+      lazy: true #L'authentification est effectuée de manière paresseuse, c'est-à-dire seulement quand nécessaire.
+      provider: app_user_provider # Il utilise le fournisseur app_user_provider pour charger les utilisateurs.
+      custom_authenticator: App\Security\LoginAuthenticator #Il utilise un authentificateur personnalisé pour gérer l'authentification.
+      logout: # Définit comment la déconnexion est gérée.
+        path: app_logout
+        # where to redirect after logout
+        # target: app_any_route
+
+  # Note: Only the *first* access control that matches will be used
+
+  #Cette section définit les contrôles d'accès pour différentes routes de l'application.
+  access_control:
+    #Par exemple, la route commençant par /admin nécessite que l'utilisateur ait le rôle ROLE_ADMIN.
+    - { path: ^/admin, roles: ROLE_ADMIN }
+      # Seuls les utilisateurs ayant le rôle ROLE_ADMIN peuvent accéder à /admin
+    - { path: ^/admin/impersonate, roles: ROLE_ALLOWED_TO_SWITCH }
+      # Seuls les utilisateurs avec le rôle ROLE_ALLOWED_TO_SWITCH peuvent accéder à /admin/impersonate
+    - { path: ^/commande, roles: ROLE_USER }
+      # Seuls les utilisateurs avec le rôle ROLE_USER peuvent accéder à /commande
+    - { path: ^/compte, roles: ROLE_USER }
+      # Seuls les utilisateurs avec le rôle ROLE_USER peuvent accéder à /compte
+
+when@test:
+  security:
+    password_hashers:
+      # By default, password hashers are resource intensive and take time. This is
+      # important to generate secure password hashes. In tests however, secure hashes
+      # are not important, waste resources and increase test times. The following
+      # reduces the work factor to the lowest possible values.
+      Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+        algorithm: auto
+        cost: 4 # Lowest possible value for bcrypt
+        time_cost: 3 # Lowest possible value for argon
+        memory_cost: 10 # Lowest possible value for argon

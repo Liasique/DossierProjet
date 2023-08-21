@@ -1,0 +1,113 @@
+<nav class="navbar navbar-expand-lg navbar-light w3-white fixed-top">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+			<!-- Bouton de navigation mobile (hamburger) -->
+		</button>
+
+		<div class="collapse navbar-collapse " id="navbarSupportedContent">
+			<a class="navbar-brand mt-2 mt-lg-0 " href="#">
+				<a class="navbar-brand" href="{{ path('home') }}">
+					<b>The Swanky Sack</b>
+				</a>
+				<!-- Logo de la marque -->
+			</a>
+			<ul class="navbar-nav  mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('products') }}">
+						<i class="fa-solid fa-bag-shopping"></i>
+						Sacs</a>
+					<!-- Lien vers la page des sacs -->
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('about') }}">Qui sommes-nous ?</a>
+					<!-- Lien vers la page "Qui sommes-nous ?" -->
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('contacts') }}">Contacts</a>
+					<!-- Lien vers la page des contacts -->
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('faq') }}">FAQs</a>
+					<!-- Lien vers la page des FAQ -->
+				</li>
+			</ul>
+			{# <div class="mx-auto d-flex">
+																		{% include '_partials/search.html.twig' %}
+																		<!-- Inclusion de la barre de recherche -->
+																		</div> #}
+		</div>
+
+		<div class="d-flex align-items-center ">
+			<div
+				class="dropdown">
+				{# L'élément de menu déroulant pour la connexion de l'utilisateur.
+								Vérifie si l'utilisateur n'a pas le rôle "ROLE_ADMIN" et a le rôle "ROLE_USER". 
+								Si c'est le cas, elle affiche un lien représentant l'utilisateur connecté. 
+								Lorsque l'utilisateur clique sur le lien, cela ouvre un menu déroulant avec des 
+								options telles que "Profil" et "Déconnexion". #}
+				{% if not is_granted("ROLE_ADMIN") and is_granted("ROLE_USER") %}
+					<small class="mx-auto">
+						{{ app.user.firstname }}</small>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+						<li>
+							<a class="dropdown-item" href="{{ path('app_account') }}">Profil</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_logout') }}">
+								<i class="fas fa-right-from-bracket"></i>Déconnexion</a>
+						</li>
+					</ul>
+				{% endif %}
+				{# Le cas où l'utilisateur a le rôle "ROLE_ADMIN". 
+																												 Affiche également un lien , représentant l'administrateur connecté.
+																												 Lorsque l'administrateur clique sur le lien, cela ouvre un menu déroulant 
+																												 vec des options telles que "Admin", "Profil" et "Déconnexion". #}
+
+
+				{% if is_granted("ROLE_ADMIN") %}
+					<small class="mx-auto">
+						{{ app.user.firstname }}</small>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+						<li>
+							<a class="dropdown-item" href="{{ path('admin') }}">Admin</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_account') }}">Profil</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+						</li>
+					</ul>
+				{% endif %}
+			</div>
+
+
+			{# Destinée aux utilisateurs qui ne sont ni administrateurs ni connectés. 
+												Affiche un bouton "Compte". Lorsque l'utilisateur clique sur le bouton, 
+												cela ouvre un menu déroulant avec des options telles que "Connexion" et "Inscription". #}
+			<div class="dropdown" style="margin-right: 6rem">
+				{% if not is_granted("ROLE_ADMIN") and not is_granted("ROLE_USER") %}
+					<a class="d-flex align-items-center hidden-arrow btn w3-black custom-dropdown-link" href="#">
+						<i class="fas fa-user-circle"></i>
+						&nbsp; Compte</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+						<li>
+							<a class="dropdown-item text-uppercase" href="{{ path('app_login') }}">Connexion</a>
+						</li>
+						<li>
+							<a class="dropdown-item text-uppercase" href="{{ path('inscription') }}">Inscription</a>
+						</li>
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="d-flex align-items-center">
+			<a class="text-reset me-3" href="{{ path('cart') }}">
+				<i class="fas fa-shopping-cart"></i>
+			</a><!-- Lien vers le panier --></div>
+	</div>
+</nav>

@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{# Cette ligne indique que ce template hérite du template de base appelé 'base.html.twig'. 
+	Cela signifie que le contenu de ce template sera affiché à l'intérieur du contenu défini dans le template de base. #}
+
+
+{% block title %}
+	{{ product.name }}
+{% endblock %}
+{# Ce bloc défini le titre de la page en utilisant le tag block. Dans ce cas, le titre de la page est défini comme le nom du produit. #}
+
+
+{% block body %}
+	{# Ce bloc body contient le contenu principal du template. Il sera rempli avec le contenu spécifique à cette page. #}
+
+	<div class="container" style="margin-top: 100px">
+		<p>
+			<a href="{{ path('products') }}" class="btn">
+				<i class="fa fa-arrow-left"></i>
+				Notre collection de sacs</a>
+
+		</p>
+		<h1 class="mb-5">{{ product.name }}</h1>
+
+
+		{# On affiche les détails du produit #}
+		<div class="row">
+			<div class="col-md-4">
+				<p>{{ product.subtitle }}</p>
+
+				<p class="mt-5 ">{{ product.description | raw }}</p>
+			</div>
+
+			<div class="col-md-4">
+				<img src="{{ asset('uploads/' ~ product.illustration) }}" alt="{{ product.name }}" class="img-fluid " style="width:80%">
+			</div>
+
+			<div
+				class="col-md-4">
+				{# <h3>{{ product.name }}</h3> #}
+
+				{% if product.isStock >= 50 %}
+					<h4 class="text-muted mt-5">
+						<b>Prix:
+							{{ (product.price / 100)|number_format(2, ',', ',') }}
+							€
+						</b>
+					</h4>
+					<p class="mt-2">Livraison gratuite</p>
+					<p class="text-success">
+						{{ product.isStock }}
+						en stock</p>
+				{%  else %}
+					<p class="text-danger {% if product.isStock < 50 %}mt-5{% endif %}">En rupture de stock</p>
+				{% endif %}
+
+
+				<div class="btn-group mt-5"></div>
+
+
+				<div class="col-md-12" style="border-left: 1px solid #dddddd;">
+					<div class="col-md-12 w3-border w3-padding">
+						Ce sac est prêt à explorer la France métropolitaine et à parcourir tous les recoins de l'Europe ! Il est prêt à vivre des aventures extraordinaires et à être le compagnon stylé. Alors, préparez-vous à vivre des moments inoubliables avec ce sac qui ne connaît pas de frontières, sauf celles de la mode et de la fonctionnalité !
+					</div>
+
+				</div>
+
+
+				{# Cette partie du code affiche différentes informations en fonction du stock du produit.
+								Si le stock est supérieur ou égal à 50, les éléments suivants seront affichés :
+								Un titre avec le montant total du produit.
+								Un paragraphe indiquant que la livraison est gratuite.
+								Un paragraphe indiquant la quantité en stock.
+								Si le stock est inférieur à 50, le message "En rupture de stock" sera affiché en rouge, avec une classe CSS text-danger.
+								Si cela est le cas, un espace supplémentaire est ajouté en utilisant la classe CSS mt-5 pour un meilleur espacement. #}
+				{# Si le stock du produit est supérieur ou égal à 50, le bouton est affiché avec la classe CSS btn-primary, qui le rend cliquable et activé.
+								Si le stock du produit est inférieur à 50, le bouton est affiché avec la classe CSS disabled, ce qui le rend non cliquable et désactivé.
+								Le lien du bouton pointe vers la route 'add_to_cart' avec l'ID du produit comme paramètre #}
+
+				<div class="w3-border-bottom"></div>
+				<div class="row w3-center">
+					{% if product.isStock >= 50 %}
+						<a href="{{ path('add_to_cart', {'id': product.id}) }}" class="btn btn-block  mt-5 mb-5 w-100">
+							<i class="fas fa-cart-plus"></i>
+							Ajouter sac au panier</a>
+
+					{% else %}
+						<div class="col-md-12">
+							<a href="{{ path('add_to_cart', {'id': product.id}) }}" class="btn btn-block mt-5 mb-5 w-100 disabled ml-2">
+								<i class="fas fa-cart-plus"></i>
+								Ajouter sac au panier
+							</a>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<ul>
+			{% for product in product %}
+				<li>{{ product.name }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{# <hr> #}
+
+
+	<section class="vh-50">
+		<div class="container py-5 h-100">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-md-12 col-xl-8">
+					<figure class="bg-light p-4" style="border-left: .35rem solid #fcdb5e; border-top: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+						<i class="fas fa-quote-left fa-2x mb-4" style="color: #fcdb5e;"></i>
+						<blockquote class="blockquote pb-2">
+							<p>
+								<i>{{ product.quota| raw }}</i>
+							</p>
+						</blockquote>
+						<figcaption class="blockquote-footer mb-0">
+							The Swanky Sack squad
+							<cite title="Source Title"></cite>
+						</figcaption>
+					</figure>
+				</div>
+				<div class="container py-5 h-100">
+					<h1>Les sacs préférés de nos clients !
+					</h1>
+					<p>
+						Découvrez ces incontournables qui font battre les cœurs et ajoutez une touche de glamour à votre look.
+					</p>
+				</div>
+
+				<div class="row">
+					{% for product in products %}
+						<div class="col-md-2">
+							{% include 'product/single_product.html.twig' %}
+						</div>
+					{% endfor %}
+
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+
+
+	{# <div class=" container mt-60"></div> #}
+
+
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		const image = document.querySelector('#myimage');
+
+let zoom = 1;
+let zoomStep = 0.1;
+let zoomLimit = 3;
+
+image.addEventListener('mouseover', () => {
+zoom += zoomStep;
+if (zoom > zoomLimit) {
+zoom = zoomLimit;
+}
+image.style.transform = `scale(${zoom})`;
+});
+
+image.addEventListener('mouseout', () => {
+zoom -= zoomStep;
+if (zoom < 1) {
+zoom = 1;
+}
+image.style.transform = `scale(${zoom})`;
+});
+	</script>
+
+{% endblock %}

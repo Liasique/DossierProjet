@@ -1,0 +1,206 @@
+@startuml
+actor Client as Cl
+actor Administrateur as Ad
+actor "Passerelle de Paiement" as PdP
+
+usecase (Inscription) as Ins
+usecase (Se Connecter) as SC
+usecase (Parcourir les Produits) as PlP
+usecase (Ajouter au Panier) as AaP
+usecase (Passer à la Caisse) as PaC
+usecase (Processus de Paiement) as PrdP
+usecase (Exécution de la Commande) as EdC
+usecase (Suivre la Commande) as SdC
+usecase (Gérer les Produits) as GdP
+usecase (Voir les Commandes) as VdC
+usecase (Ajouter Transporteurs) as AT
+usecase (Choisir Transporteur) as CT
+usecase (Gérer son Compte) as GsC
+usecase (Ajouter Adresse de Livraison) as AAdL
+
+Cl --> Ins
+Cl --> SC
+Cl --> PlP
+Cl --> AaP
+
+Ad --> PlP
+Ad --> AaP
+Ad --> SC
+Ad --> GdP
+Ad --> VdC
+Ad --> AT
+Ad --> CT
+
+SC --> GsC : include
+GsC --> AAdL : include
+SC --> PaC : include
+SC --> SdC : include
+SC --> CT : include
+PaC --> PrdP : include
+PrdP --> PdP : include
+PaC --> EdC : include
+@enduml
+
+
+
+https://showme.redstarplugin.com/s/ytq534sE
+
+
+
+@startuml
+actor Client as C
+actor Administrateur as A
+actor "Passerelle de Paiement" as PG
+
+usecase (Inscription) as I
+usecase (Se Connecter) as SC
+usecase (Parcourir les Produits) as PP
+usecase (Ajouter au Panier) as AP
+usecase (Passer à la Caisse) as PC
+usecase (Processus de Paiement) as PDP
+usecase (Exécution de la Commande) as EC
+usecase (Suivre la Commande) as SLC
+usecase (Gérer les Produits) as GP
+usecase (Voir les Commandes) as VC
+usecase (Ajouter Transporteurs) as AT
+usecase (Choisir Transporteur) as CT
+usecase (Gérer son Compte) as GSC
+usecase (Ajouter Adresse de Livraison) as ADL
+
+C --> I
+C --> SC
+C --> PP
+C --> AP
+C --> GSC
+GSC --> ADL : include
+
+A --> PP
+A --> AP
+A --> SC
+A --> GP
+A --> VC
+A --> AT
+A --> CT
+
+SC --> PC : include
+SC --> SLC : include
+SC --> CT : include
+PC --> PDP : include
+PDP --> PG : include
+PC --> EC : include
+@enduml
+
+
+
+
+
+@startuml
+entity "User" as user {
+  +ID : int(11)
+  ----
+  Email : varchar(180)
+  Name : string
+  Roles : json
+  Pasword : varchar(255)
+  Firstname : varchar(255)
+  Lastname : varchar(255)
+  Is_activated :tinyint(1)
+  Avatar: varchar(255)
+}
+
+entity "Order" as order {
+  +ID : int(11)
+  ----
+  User_id : int(11)
+  --
+  Created_at : datetime
+  Carrrier_name : varchar(255)
+  Carrier_price :double
+  Delivery : longtext
+  Ref : varchar (255)
+  Stripe_session_id : varchar(255)
+  State : int(11)
+}
+
+entity "Order Details" as order_details {
+  +ID : int(11)
+  ----
+  My_order_id : int(11)
+  --
+  Product : varchar(255)
+  Quantity : int(11)
+  Price : double
+  Total : double
+}
+
+entity "Invoice" as invoice {
+  +ID : int(11)
+  ----
+  Order_invoce_id : int(11)
+  --
+  Filename : varchar(255)
+  File : varchar(255)
+  Created_at : datetime
+}
+
+entity "Address" as address {
+  +ID : int(11)
+  ----
+  User_id : int(11)
+  --
+  Name : varchar(255)
+  Firstname : varchar(255)
+  Lastname : varchar(255)
+  Company :varchar(255)
+  Address : varchar(255)
+  City : varchar(255)
+  Postal : varchar(255)
+}
+
+entity "Product" as product {
+  +ID : int(11)
+  ----
+  Caregory_id : int(11)
+  --
+  Name : varchar(255)
+  Slug : varchar(255)
+  Subtitle : varchar(255)
+  Description : longtext
+  Price : double
+  Illustration : varchar(255)
+  Is_best : tinyint(1)
+}
+
+entity "Category" as category {
+  +ID : int(11)
+  ----
+  Name : varchar(255)
+}
+
+entity "Carrier" as carrier {
+  +ID :int(11)
+  ----
+  Name : varchar(255)
+  Despription : longtext
+  Price : double
+}
+
+entity "Carousel" as carousel {
+  +ID :int(11)
+  ----
+  Name : varchar(255)
+  Despription : longtext
+  Illustration : varchar(255)
+  Is_activated :tinyint(1)
+  Btn_title : varchar(255)
+  Btn_url : varchar(255)
+}
+
+user ||--o{ order : passe
+order ||--|{ order_details : a
+order_details }|--|| product : contient
+order ||--|| invoice : génère
+user ||--|| address : reçoit à
+product ||--|| category : appartient à
+order ||--|| carrier : expédié par
+@enduml

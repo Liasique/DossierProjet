@@ -1,0 +1,51 @@
+{# Ce template Twig pour une page d'inscription #}
+
+{% extends 'base.html.twig' %}
+{# Cette ligne indique que ce template hérite du template de base appelé 'base.html.twig'.
+ Cela signifie que le contenu de ce template sera affiché à l'intérieur du contenu défini dans le template de base. #}
+
+{% block title %}Inscription{% endblock %}
+{# Ce bloc défini le titre de la page en utilisant le tag block. Dans ce cas, le titre de la page est défini comme "Inscription". #}
+
+
+{% block body %}
+{# Ce bloc body contient le contenu principal du template. Il sera rempli avec le contenu spécifique à cette page. #}
+
+    <div class="container mt-2" style="">
+        <div class="col-md-4 mx-auto">
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% if app.flashes('success') is defined and app.flashes('success') is not empty %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {% for message in app.flashes('success') %}
+                        {{ message }}
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+
+            <div class="w3-container w3-black">
+                <h2>Inscription</h2>
+            </div>
+            <div class="w3-container w3-card-4 pb-5">
+                <div class="mt-5">
+                    {{ form(form) }}
+                        {# Formulaire d'inscription. Cela suppose que la variable form est passée au template et représente le formulaire d'inscription. #}
+                </div>
+            </div>
+            <br>
+            <div class="row mt-5">
+                <div class="w3-center">
+                    <p class="mt-2">Déjà membre ? <a class="w3-text-orange" href="{{ path('app_login') }}">Se connecter</a></p>
+                    {# Un lien est affiché pour rediriger les utilisateurs déjà inscrits vers la page de connexion. #}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

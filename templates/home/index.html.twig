@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	The Swanky Sack
+{% endblock %}
+
+{% block body %}
+	{% block carousel %}{% endblock %}
+	<div class="container mt-5">
+		<section class="grainy-gradient-intro">
+			<div class="d-flex justify-content-center align-items-center text-center" style="height: calc(80vh - 16px);">
+				<h1 class="display-4 fw-bold text-uppercase text-dark mb-0" style="letter-spacing: 15px;">The Swanky Sack</h1>
+				<p class="display-4 fw-bold text-uppercase text-dark mb-0" style="letter-spacing: 15px;">
+					<div class="spinner-grow" role="status">
+						<span class="visually-hidden">The Swanky Sack</span>
+					</div>
+				</p>
+			</div>
+		</section>
+
+		<h1>Les sacs préférés de nos clients !</h1>
+		<p>Découvrez ces incontournables qui font battre les cœurs et ajoutez une touche de glamour à votre look!</p>
+
+		<div class="row">
+			{% for product in products %}
+				<div class="col-md-3">
+					{% include 'product/single_product.html.twig' %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

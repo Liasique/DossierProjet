@@ -1,0 +1,659 @@
+:root {
+    --var-color-white: #fff;
+}
+
+html {
+    background-color: #F5F5F5;
+    font-family: Roboto, sans-serif;
+}
+
+.border {
+    border: 1px solid red;
+}
+
+i {
+    font-size: 20px;
+}
+
+/* Carousel */
+.carousel-item {
+    height: 65vh;
+}
+
+.first-slide {
+    object-fit: cover;
+    background-position: bottom left;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.39);
+    z-index: 1;
+}
+
+.carousel-caption {
+    z-index: 1;
+}
+
+.carousel-caption h1,
+.carousel-caption p,
+.carousel-caption a {
+    color: white;
+}
+
+nav a:link {
+    text-transform: uppercase;
+}
+
+/* On retire la flèche de la dropdown */
+.custom-dropdown-link::after {
+    display: none !important;
+}
+
+.add-and-remove-to-cart button {
+    margin-right: 10px;
+}
+
+.add-and-remove-to-cart i {
+    position: relative;
+    top: 0;
+}
+
+.add-and-remove-to-cart span {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: normal;
+    font-size: small;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+a:link {
+    color: #151c36;
+    text-decoration: none;
+}
+
+.navbar-toggler-icon {
+    color: #ffffff;
+}
+
+fieldset legend {
+    font-weight: bold;
+}
+
+.btn-group .fa-circle-minus,
+.btn-group .fa-plus-circle {
+    color: #333333;
+}
+
+.card-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navbar-toggler-icon {
+    color: #fff;
+}
+
+
+
+/********* start BARRE DE NAVIGATION PERSONNALISÉE *********/
+nav {
+    padding: 1rem 2rem;
+    background-color: #333;
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    /* Ajout de cette ligne pour aligner les liens à droite */
+}
+
+.nav-links li {
+    list-style: none;
+    margin-right: 1.5rem;
+    /* Modification de margin-left en margin-right pour aligner les liens à droite */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger .line {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input[type="text"] {
+    padding: 0.3rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.search-box i {
+    position: absolute;
+    top: 49.9%;
+    left: 91.5%;
+    transform: translateY(-50%);
+    color: #555;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    padding: 0.8rem;
+}
+
+.search-box button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-left: -36px;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+
+.search-box .input-group {
+    height: 45px;
+}
+
+.search-box .form-control {
+    border-radius: 0;
+    height: 45px;
+}
+
+.search-box .btn-outline-secondary {
+    border-radius: 0;
+    height: 45px;
+}
+
+/* Style du fond sombre de fond */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    border: 1px solid #888;
+    width: 30%;
+    text-align: center;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.modal-backdrop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+
+/********* FIN BARRE DE NAVIGATION PERSONNALISÉE *********/
+/* FOOTER */
+
+footer {
+    background-color: black !important;
+    padding: 20px !important;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    color: #777;
+    text-decoration: none;
+}
+
+footer .social-icons {
+    display: flex;
+    align-items: center;
+}
+
+footer .social-icons a {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+/********* MEDIA QUERIES MAX 768 *********/
+@media screen and (max-width: 768px) {
+    .nav-links {
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        top: -22.7%;
+        display: none;
+        overflow: hidden;
+        position: absolute;
+        margin-top: 11.5rem;
+        padding-bottom: 1rem;
+        border-top: 1px solid #fff;
+        transition: height 0.5s ease-in-out;
+        background-color: rgba(51, 51, 51, 0.85);
+        z-index: 6000;
+    }
+
+    .search {
+        position: absolute;
+        padding: 0 1rem;
+        top: 55%;
+        left: 50%;
+        width: 100%;
+        z-index: 1000;
+        transform: translate(-50%, -50%);
+    }
+
+    .login {
+        padding: 0.5rem 1rem;
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        background-color: #333;
+        z-index: 6000;
+
+    }
+
+    .nav-links li {
+        width: 100%;
+        list-style: none;
+        margin-top: 1rem;
+        margin-right: 1.5rem;
+        /* Modification de margin-left en margin-right pour aligner les liens à droite */
+    }
+
+    .nav-links li a:hover {
+        color: #fff;
+    }
+
+    .dropdown {
+        width: 100%;
+        display: block;
+        position: absolute;
+    }
+
+    .burger {
+        display: block;
+        align-items: end;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        /* Ajout de cette ligne pour positionner le menu déroulant à droite */
+        width: 100%;
+        height: 100vh;
+        background-color: #333;
+        padding: 10px;
+        transition: all 0.5s ease-in;
+    }
+
+    .nav-links.active li {
+        margin: 0.5rem;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        width: 100%;
+        border: 1px solid red;
+    }
+
+    .nav-links.active a {
+        color: #fff;
+    }
+
+    .nav-item .login {
+        margin-top: 10px;
+    }
+
+    .nav-active {
+        display: block;
+    }
+
+    .no-scroll {
+        overflow: hidden;
+    }
+
+    .close-menu {
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: #000;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .close-menu:hover {
+        background-color: #f1f1f1;
+    }
+
+    .burger {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .burger .line {
+        color: #fff;
+        width: 30px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .burger:before,
+    .burger:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: -1;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .burger:before {
+        transform-origin: left top;
+    }
+
+    .burger:after {
+        transform-origin: right top;
+    }
+
+    .burger.open:before,
+    .burger.open:after {
+        transform: scale(1);
+    }
+
+    .burger.open .line:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.open .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.open .line:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .close-menu {
+        display: none;
+    }
+
+    .burger.open+.close-menu {
+        display: block;
+    }
+}
+
+
+/********* MEDIA QUERIES  *********/
+/********* REQUÊTES MÉDIAS *********/
+
+/* Appareils très petits, téléphones */
+@media only screen and (max-width: 575.98px) {
+    /* Vos styles CSS pour appareils très petits vont ici */
+}
+
+/* Appareils petits, tablettes */
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+    /* Vos styles CSS pour appareils petits vont ici */
+}
+
+/* Appareils moyens, ordinateurs de bureau */
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+    /* Vos styles CSS pour appareils moyens vont ici */
+}
+
+/* Appareils grands, grands ordinateurs de bureau */
+@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+    /* Vos styles CSS pour appareils grands vont ici */
+}
+
+/* Appareils très grands, écrans larges */
+@media only screen and (min-width: 1200px) {
+    /* Vos styles CSS pour appareils très grands vont ici */
+}
+
+@media screen and (max-width: 812px) {
+    .nav-links {
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        top: -22.7%;
+        display: none;
+        overflow: hidden;
+        position: absolute;
+        margin-top: 11.5rem;
+        padding-bottom: 1rem;
+        border-top: 1px solid #fff;
+        transition: height 0.5s ease-in-out;
+        background-color: rgba(51, 51, 51, 0.85);
+        z-index: 6000;
+    }
+
+    .search {
+        position: absolute;
+        padding: 0 1rem;
+        top: 55%;
+        left: 50%;
+        width: 100%;
+        z-index: 1000;
+        transform: translate(-50%, -50%);
+    }
+
+    .login {
+        padding: 0.5rem 1rem;
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        background-color: #333;
+        z-index: 6000;
+
+    }
+
+    .nav-links li {
+        width: 100%;
+        list-style: none;
+        margin-top: 1rem;
+        margin-right: 1.5rem;
+        /* Modification de margin-left en margin-right pour aligner les liens à droite */
+    }
+
+    .nav-links li a:hover {
+        color: #fff;
+    }
+
+    .dropdown {
+        width: 100%;
+        display: block;
+        position: absolute;
+    }
+
+    .burger {
+        display: block;
+        align-items: end;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        /* Ajout de cette ligne pour positionner le menu déroulant à droite */
+        width: 100%;
+        height: 100vh;
+        background-color: #333;
+        padding: 10px;
+        transition: all 0.5s ease-in;
+    }
+
+    .nav-links.active li {
+        margin: 0.5rem;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        width: 100%;
+        border: 1px solid red;
+    }
+
+    .nav-links.active a {
+        color: #fff;
+    }
+
+    .nav-item .login {
+        margin-top: 10px;
+    }
+
+    .nav-active {
+        display: block;
+    }
+
+    .no-scroll {
+        overflow: hidden;
+    }
+
+    .close-menu {
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: #000;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .close-menu:hover {
+        background-color: #f1f1f1;
+    }
+
+    .burger {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .burger .line {
+        color: #fff;
+        width: 30px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .burger:before,
+    .burger:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        z-index: -1;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .burger:before {
+        transform-origin: left top;
+    }
+
+    .burger:after {
+        transform-origin: right top;
+    }
+
+    .burger.open:before,
+    .burger.open:after {
+        transform: scale(1);
+    }
+
+    .burger.open .line:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.open .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.open .line:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .close-menu {
+        display: none;
+    }
+
+    .burger.open+.close-menu {
+        display: block;
+    }
+}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-2" style="">
+		<div class="col-md-4 mx-auto justify-content-center align-content-center">
+			{% if error %}
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<strong>{{ error.messageKey|trans(error.messageData, 'security') }}</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			{% endif %}
+			<div class="w3-container w3-black">
+				<h2>Connexion</h2>
+			</div>
+			<form method="post" class="w3-container w3-card-4">
+				<br>
+				<p>
+					<label class="w3-text-grey">Email</label><br>
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="w3-input border" autocomplete="email" required autofocus>
+				</p>
+				<p>
+					<label class="w3-text-grey">Mot de passe</label><br>
+					<input type="password" name="password" id="inputPassword" class="w3-input w3-border" required autocomplete="current-password">
+				</p>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<br>
+				<div class="w3-row">
+					<div class="w3-half">
+						<input class="w3-check" type="checkbox" name="_remember_me">
+						<label>
+							Se souvenir de moi</label>
+						<br><br>
+					</div>
+				</div>
+				<div class="w3-row mb-5">
+					<div class="w3-col m12 mb-5 w3-center">
+						<button type="submit" class="btn w3-padding w-100 w3-black" style="width:50%">Connexion &nbsp; ❯</button>
+					</div>
+					<div class="w3-col m12 w3-center">
+						<p class="mt-2 text-primary">
+							<a href="#">Mot de passe oublié.</a>
+						</p>
+					</div>
+				</div>
+			</form>
+			<div class="w3-col m12 w3-center mt-5">
+				<p class="mt-2">Pas encore inscrit ?
+					<a class="text-primary w3-text-orange" href="{{ path('inscription') }}">Créer un compte</a>
+
+				</p>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

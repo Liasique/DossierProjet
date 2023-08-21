@@ -1,0 +1,62 @@
+{# La page de liste des produits #}
+
+{% extends 'base.html.twig' %}
+{# Cette ligne indique que ce template hérite du template de base appelé 'base.html.twig'. 
+Cela signifie que le contenu de ce template sera affiché à l'intérieur du contenu défini dans le template de base. #}
+
+
+{% block title %}Sac chez The Swanky Sack
+{% endblock %}
+{# Ce bloc défini le titre de la page en utilisant le tag block. Dans ce cas, le titre de la page est défini comme "Nos produits" #}
+
+
+{% block body %}
+
+	{# Filtrage de produits par catégorie #}
+	<div class="row">
+		<div
+			class="col-md-10">
+
+			{# Ici les produits sont affichés. 
+									Si aucun produit n'est disponible, un message "Aucun produit trouvé" est affiché. Sinon, une boucle for est utilisée pour parcourir les produits et inclure un autre template 'product/single_product.html.twig' pour afficher chaque produit individuellement. #}
+
+			<h3 class="mb-5">Nos sacs</h3>
+			{% if products is empty %}
+				<p>Aucun produit trouvé.</p>
+			{% else %}
+				<div class="row">
+					{% for success in app.flashes('success') %}
+						<div id="flash-message" class="alert alert-success" style="display:none">
+							{{ success }}
+						</div>
+					{% endfor %}
+
+					{% for product in products %}
+						<div class="col-md-4 col-sm-6 col-xs-12">
+							{% include 'product/single_product.html.twig' %}
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+
+		</div>
+		<div
+			class="col-md-2">
+			{# un formulaire de filtrage est affiché en utilisant
+						{{ form_start(form) }} et {{ form_widget(form) }}. 
+						Cela suppose que la variable form est passée au template et représente le formulaire de filtrage des produits. #}
+
+			<h4>Trouvez votre sac de rêve !</h4>
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+		</div>
+
+	{% endblock %}
+
+	{# Le bloc javascripts est utilisé pour inclure les fichiers CSS et JavaScript nécessaires à l'affichage du slider Bootstrap 
+					        pour le filtrage des produits. Les liens fournis sont des liens externes vers les fichiers hébergés sur un CDN. #}
+
+	{% block javascripts %}
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css" integrity="sha512-vu31kD/t3Hq3y7pITeRK5g5qlKjQ6uSSR6H5d6Ufi7VUZqf3q7ouUyF5z5b5EoItFvEd8PZnSdKXAcddbrTYbg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-XNwKPdZm3qZ1Kp9AZ+OJ20GLxbFCbLhsyKXPW1+eRHw+sGktvY82+EKY8yP86n0CfPRNOvMDUhZtQ8Z9TbTlLg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	{% endblock %}
